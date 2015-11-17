@@ -36,29 +36,25 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('aboutCtrl', function($scope, $ionicPlatform, $cordovaFile) {
+.controller('aboutCtrl',function($scope, $timeout, $cordovaFileTransfer) {
 
-  var directory = 'downloads';
-  var filename = 'http://192.168.1.49/aromatch/hello.mp3';
+  
 
-  $ionicPlatform.ready(function() {})
-  .then(function() {
-    return $cordovaFile.createDir(directory, false);
-  })
-  .then(function() {
-    return $cordovaFile.createFile(directory + '/' + filename, false);
-  })
-  .then(function(newFile) {
-    return $cordovaFile.downloadFile(url, newFile.nativeURL);
-  })
-  .then(function(result) {
-    // Success!
-  }, function(err) {
-    // Error
-  }, function (progress) {
-    // constant progress updates
-     download.progress = progress.loaded/progress.total;      
-  });
+    var url = "http://cdn.wall-pix.net/albums/art-space/00030109.jpg";
+    var targetPath = cordova.file.documentsDirectory + "testImage.png";
+    var trustHosts = true
+    var options = {};
+
+    $cordovaFileTransfer.download(url, targetPath, options, trustHosts)
+      .then(function(result) {
+        // Success!
+      }, function(err) {
+        // Error
+      }, function (progress) {
+        $timeout(function () {
+          $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+		})
+      });
 
 })
 
