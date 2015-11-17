@@ -36,8 +36,8 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('aboutCtrl', function($scope) {
-exampleApp.controller('ExampleController', function($scope, $ionicPlatform, $cordovaFile) {
+.controller('aboutCtrl', function($scope, $ionicPlatform, $cordovaFile) {
+
   var directory = 'downloads';
   var filename = 'http://192.168.1.49/aromatch/hello.mp3';
 
@@ -59,7 +59,7 @@ exampleApp.controller('ExampleController', function($scope, $ionicPlatform, $cor
     // constant progress updates
      download.progress = progress.loaded/progress.total;      
   });
-});
+
 })
 
 .controller('CheckinCtrl', function($scope) {
